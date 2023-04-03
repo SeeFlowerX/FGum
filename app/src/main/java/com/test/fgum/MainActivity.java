@@ -38,8 +38,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     static public void update_text(String msg) {
-        TextView tv = MainActivity.INSTANCE.binding.sampleText;
-        tv.append("\n" + msg + "\n");
+        MainActivity.INSTANCE.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                TextView tv = MainActivity.INSTANCE.binding.sampleText;
+                tv.append("\n" + msg + "\n");
+            }
+        });
     }
 
     public boolean load_so_flag = false;
